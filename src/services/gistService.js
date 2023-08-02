@@ -1,6 +1,18 @@
 import { Octokit } from "@octokit/rest";
-const octokit = new Octokit()
+import { createTokenAuth } from "@octokit/auth-token";
+const auth = createTokenAuth(
+  process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN
+);
 
-export const getPublicGists = () => octokit.gists.listPublic()
+let octokit;
+const getAuth = async () => {
+  const authentication = await auth();
+  octokit = new Octokit({ auth: authentication.token });
+};
 
-export const getGistForUser = username =>  octokit.gists.listForUser({ username });
+getAuth();
+
+export const getPublicGists = () => octokit.gists.listPublic();
+
+export const getGistForUser = (username) =>
+  octokit.gists.listForUser({ username });
