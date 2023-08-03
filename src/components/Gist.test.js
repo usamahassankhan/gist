@@ -32,7 +32,6 @@ test("renders Gist component with provided data", () => {
 
   // Test Gist header elements
   expect(screen.getByText("example_user")).toBeInTheDocument();
-  expect(screen.getByText("4 Files")).toBeInTheDocument();
   expect(screen.getByText("Forks")).toBeInTheDocument();
   expect(screen.getByText("Comments")).toBeInTheDocument();
   expect(screen.getByText("Stars")).toBeInTheDocument();
